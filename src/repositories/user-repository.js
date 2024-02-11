@@ -1,7 +1,7 @@
 const {User} = require("../models")
 const jwt = require("jsonwebtoken")
 const AppError = require('../utils/errors/app-error');
-const CrudRepository = require("./Crud-Repository");
+const CrudRepository = require("./crud-Repository");
 
 class userRepository extends CrudRepository{
 
