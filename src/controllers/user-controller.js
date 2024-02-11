@@ -20,8 +20,7 @@ const generateToken = (id) => {
 
 async function createUser(req, res) {
   try {
-    console.log(req.body);
-    const { name, email, password, confirmPassword, phone, dob } = req.body;
+    const { name, email, userpassword, confirmPassword, phone, dob } = req.body;
     const userExists = await User.findOne({ email });
     if (userExists)
       throw new AppError(
@@ -39,7 +38,7 @@ async function createUser(req, res) {
     const user = await UserService.createUser({
       name,
       email,
-      password,
+      password:userpassword,
       phone,
       dob,
     });
