@@ -38,7 +38,7 @@ async function createUser(req, res) {
     const user = await UserService.createUser({
       name,
       email,
-      password:userpassword,
+      password: userpassword,
       phone,
       dob,
     });

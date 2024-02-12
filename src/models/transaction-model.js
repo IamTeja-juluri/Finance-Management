@@ -7,7 +7,7 @@ const transactionSchema = mongoose.Schema(
     },
     amount: {
       type: Number,
-      required: true,
+      required: [true,'Please add transaction amount']
     },
     account: {
       type: String,

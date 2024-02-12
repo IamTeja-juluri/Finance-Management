@@ -1,3 +1,16 @@
 module.exports={
-    UserService:require('./user-service')
+    UserService:require('./user-service'),
+    BillService:require('./bill-service'),
+    BudgetService:require('./budget-service'),
+    CommentService:require('./comment-service'),
+    DebtService:require('./debt-service'),
+    DownvoteService:require('./downvote-service'),
+    PaymentService:require('./payment-service'),
+    PostService:require('./post-service'),
+    ReplyService:require('./reply-service'),
+    SplitService:require('./split-service'),
+    TargetService:require('./target-service'),
+    TokenService:require('./token-service'),
+    TransactionService:require('./transaction-service'),
+    UpvoteService:require('./upvote-service')
 }

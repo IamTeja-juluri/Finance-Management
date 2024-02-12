@@ -5,11 +5,12 @@ module.exports = {
   Comment: require("./comment-model"),
   Reply: require("./reply-model"),
   Upvote: require("./upvote-model"),
-  DownVote: require("./downvote-model"),
+  Downvote: require("./downvote-model"),
   Transaction: require("./transaction-model"),
   Budget: require("./budget-model"),
   Bill: require("./bill-model"),
   Payment: require("./payment-model"),
   Debt: require("./debt-model"),
-  Target : require("./target-model")
+  Target : require("./target-model"),
+  Split : require("./split- model")
 };

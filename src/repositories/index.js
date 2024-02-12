@@ -1,3 +1,16 @@
 module.exports={
-    UserRepository:require('./user-repository')
-  }
+    UserRepository:require('./user-repository'),
+    BillRepository:require('./bill-repository'),
+    BudgetRepository:require('./budget-repository'),
+    CommentRepository:require('./comment-repository'),
+    DebtRepository:require('./debt-repository'),
+    DownvoteRepository:require('./downvote-repository'),
+    PaymentRepository:require('./payment-repository'),
+    PostRepository:require('./post-repository'),
+    ReplyRepository:require('./reply-repository'),
+    SplitRepository:require('./split-repository'),
+    TargetRepository:require('./target-repository'),
+    TokenRepository:require('./token-repository'),
+    TransactionRepository:require('./transaction-repository'),
+    UpvoteRepository:require('./upvote-repository')
+}
