@@ -18,6 +18,13 @@ class CrudRepository {
     return response;
   }
 
+  async deleteMany(data) {
+    const response = await this.model.deleteMany(data);
+    if (!response)
+      throw new AppError("Not able to find resource", StatusCodes.NOT_FOUND);
+    return response;
+  }
+
   async get(data) {
     const response = await this.model.find(data);
     if (!response)
@@ -39,14 +46,9 @@ class CrudRepository {
     return response;
   }
 
-  async getAll(data) {
-    const response = await this.model.find(data);
-    return response;
-  }
-
-  async UpdateOne(id, data) {
+  async updateOne(query, data) {
     const response = await this.model.findOneAndUpdate(
-      { _id: id },
+      query,
       { $set: data },
       { new: true }
     );

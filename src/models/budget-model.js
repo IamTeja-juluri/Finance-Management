@@ -15,15 +15,15 @@ const budgetSchema = mongoose.Schema(
     },
     expenseCategory: {
       type: String,
-      enum: ["", ""],
     },
     budgetType: {
       type: String,
-      enum: ["", ""],
+      enum: ["Essential", "Close out","Party"],
+      default : "Essential"
     },
     budgetPeriod: {
       type: String,
-      enum: ["weekly", "monthly", "yearly"],
+      enum: ["Weekly", "Monthly", "Yearly"],
     },
   },
   {

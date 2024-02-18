@@ -17,6 +17,10 @@ const billSchema = mongoose.Schema(
       type: Date,
       required: [true, "Please add a due date for your bill"],
     },
+    markAsComplete: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

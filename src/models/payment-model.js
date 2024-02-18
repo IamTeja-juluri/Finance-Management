@@ -5,18 +5,22 @@ const paymentSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    name : {
-        type : String,
-        required: [true,'Please provide a name for the payment']
+    name: {
+      type: String,
+      required: [true,"Please provide a name for the payment"],
     },
-    amount : {
-        type : Number,
-        required: [true,'Please provide an amount for the payment getting scheduled']
+    amount: {
+      type: Number,
+      required: [true,"Please provide an amount for the payment getting scheduled"],
     },
-    date : {
-        type : Date,
-        required : [true,'Please provide scheduled date for the payment']
-    }
+    date: {
+      type: Date,
+      required: [true,"Please provide scheduled date for the payment"],
+    },
+    markAsComplete: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

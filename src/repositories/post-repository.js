@@ -5,6 +5,10 @@ class postRepository extends CrudRepository {
   constructor() {
     super(Post);
   }
+  async get(data) {
+    const posts = await Post.find().sort({ createdAt: -1 });
+    return posts;
+  }
 }
 
 module.exports = postRepository;

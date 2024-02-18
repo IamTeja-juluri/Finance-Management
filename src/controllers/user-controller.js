@@ -13,6 +13,7 @@ const { ServerConfig } = require("../config");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary").v2;
 const { fileSizeFormatter } = require("../utils/common/fileUpload");
+const axios = require("axios");
 
 const generateToken = (id) => {
   return jwt.sign({ id }, ServerConfig.JWT_SECRET, { expiresIn: "1d" });
@@ -33,22 +34,17 @@ async function createUser(req, res) {
         `User with mobileNumber ${phone} is already in use`,
         StatusCodes.CONFLICT
       );
-    if (password !== confirmPassword)
+    if (userpassword !== confirmPassword)
       throw new Error("Passwords do not match", StatusCodes.BAD_REQUEST);
+
+    const otp = sendOtp();
+    const verify = verifyOtp(otp);
     const user = await UserService.createUser({
       name,
       email,
       password: userpassword,
       phone,
       dob,
-    });
-    const token = generateToken(user._id);
-    res.cookie("token", token, {
-      path: "/",
-      httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 24 * 60 * 60),
-      sameSite: "none",
-      secure: true,
     });
     SuccessResponse.data = user;
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
@@ -57,6 +53,30 @@ async function createUser(req, res) {
     return res.status(error.statusCode).json(ErrorResponse);
   }
 }
+
+async function sendOtp() {
+  const options = {
+    method: "POST",
+    url: ServerConfig.OTP_URL,
+    headers: {
+      "X-RapidAPI-Key": ServerConfig.X_RAPIDAPI_KEY,
+      "X-RapidAPI-Host": ServerConfig.X_RAPIDAPI_HOST,
+    },
+  };
+  try {
+    const response = await axios.request(options);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw new AppError(
+      "Something went wrong from otp server",
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+}
+
+async function verifyOtp() {}
 
 async function userInfo(req, res) {
   try {
@@ -97,6 +117,7 @@ async function loginUser(req, res) {
     req.user.token = token;
     const { password, __v, ...sanitizedData } = user._doc;
     SuccessResponse.data = sanitizedData;
+    SuccessResponse.data.accessToken = token;
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
     ErrorResponse.error = error;

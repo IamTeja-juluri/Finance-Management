@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { categories, accounts } = require("../utils/common/enums");
 const transactionSchema = mongoose.Schema(
   {
     userId: {
@@ -11,11 +12,12 @@ const transactionSchema = mongoose.Schema(
     },
     account: {
       type: String,
-      enum: ["account1", "account2", "account3"],
-      default: "account1",
+      enum: accounts,
+      required : [true,'Account is required'],
     },
     category: {
       type: String,
+      enum : categories,
       required: [true, "Please choose appropriate category"],
     },
     label: {

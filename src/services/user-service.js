@@ -6,7 +6,6 @@ const userRepository = new UserRepository();
 
 async function createUser(data){
     try{
-        console.log('data=',data)
         const user = await userRepository.create(data);
         return user;
     }catch(error){

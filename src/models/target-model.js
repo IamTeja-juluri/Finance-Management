@@ -16,9 +16,10 @@ const targetSchema = mongoose.Schema({
     type : Date,
     required : [true,'Please provide a date to achieve this target']
    },
-   description : {
-    type  : String,
-    required : [true,'Please provide some description about your target']
+   status : {
+    type : String,
+    enum : ['Pending','Fulfilled'],
+    default : 'Pending'
    }
 },{
     timestamps:true

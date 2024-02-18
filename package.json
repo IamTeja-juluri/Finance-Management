@@ -9,6 +9,7 @@
   "author": "Teja",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.41.3",
@@ -25,6 +26,7 @@
     "nodemailer": "^6.9.8",
     "nodemon": "^3.0.1",
     "path": "^0.12.7",
+    "redis": "^4.6.13",
     "winston": "^3.9.0"
   }
 }

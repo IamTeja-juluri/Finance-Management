@@ -1,10 +1,31 @@
-const express= require('express');
-const { InfoController }=require('../../controllers')
+const express= require('express')
 const userRoutes = require('./user-routes')
-
+const billRoutes = require('./bill-routes')
+const budgetRoutes = require('./budget-routes')
+const commentRoutes = require('./comment-routes')
+const debtRoutes = require('./debt-routes')
+const downvoteRoutes = require('./downvote-routes')
+const paymentRoutes = require('./payment-routes')
+const postRoutes = require('./post-routes')
+const replyRoutes = require('./reply-routes')
+const splitRoutes = require('./split-routes')
+const targetRoutes = require('./target-routes')
+const transactionRoutes = require('./transaction-routes')
+const upvoteRoutes = require('./upvote-routes')
 const router=express.Router();
-
-router.get('/info',InfoController.info)
 router.use('/user',userRoutes)
+router.use('/bill',billRoutes)
+router.use('/budget',budgetRoutes)
+router.use('/comment',commentRoutes)
+router.use('/debt',debtRoutes)
+router.use('/downvote',downvoteRoutes)
+router.use('/payment',paymentRoutes)
+router.use('/post',postRoutes)
+router.use('/reply',replyRoutes)
+router.use('/split',splitRoutes)
+router.use('/target',targetRoutes)
+router.use('/transaction',transactionRoutes)
+router.use('/upvote',upvoteRoutes)
+
 
 module.exports=router

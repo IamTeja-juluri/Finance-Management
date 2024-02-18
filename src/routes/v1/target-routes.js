@@ -1,0 +1,10 @@
+const express =  require("express")
+const { TargetController } = require("../../controllers")
+const { AuthMiddlewares } = require("../../middlewares")
+const router = express.Router()
+router.use(express.json())
+router.post('/',AuthMiddlewares.protect,TargetController.addTarget)
+router.get('/',AuthMiddlewares.protect,TargetController.getTargets)
+router.patch('/',AuthMiddlewares.protect,TargetController.updateTarget)
+router.delete('/',TargetController.deleteTargets)
+module.exports=router;

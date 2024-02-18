@@ -10,7 +10,6 @@ module.exports={
     ReplyService:require('./reply-service'),
     SplitService:require('./split-service'),
     TargetService:require('./target-service'),
-    TokenService:require('./token-service'),
     TransactionService:require('./transaction-service'),
     UpvoteService:require('./upvote-service')
 }

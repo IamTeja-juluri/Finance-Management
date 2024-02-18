@@ -1,5 +1,4 @@
 module.exports = {
-  InfoController: require("./info-controller"),
   UserController: require("./user-controller"),
   BillController: require("./bill-controller"),
   BudgetController: require("./budget-controller"),
@@ -11,7 +10,6 @@ module.exports = {
   ReplyController: require("./reply-controller"),
   SplitController: require("./split-controller"),
   TargetController: require("./target-controller"),
-  TokenController: require("./token-controller"),
   TransactionController: require("./transaction-controller"),
   UpvoteController: require("./upvote-controller"),
 };
