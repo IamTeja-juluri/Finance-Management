@@ -18,7 +18,9 @@ async function upvote(req, res) {
 
 async function getUpvotes(req, res) {
   try {
-    const votes = await ReplyService.getUpvotes({ modelId : req.params.commentId });
+    const votes = await UpvoteService.getUpvotes({
+      objectId: req.params.modelId,
+    });
     SuccessResponse.data = votes;
     return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
@@ -27,6 +29,18 @@ async function getUpvotes(req, res) {
   }
 }
 
+async function removeUpvote(req, res) {
+  try {
+    const votes = await UpvoteService.removeUpvote({
+      userId: req.user._id,
+      objectId: req.params.modelId,
+    });
+    SuccessResponse.data = votes;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
+  } catch (error) {
+    ErrorResponse.error = error;
+    return res.status(error.statusCode).json(ErrorResponse);
+  }
+}
 
-
-module.exports = { upvote,getUpvotes };
+module.exports = { upvote, getUpvotes, removeUpvote };
