@@ -13,4 +13,5 @@ router.patch("/updateprofilepicture",AuthMiddlewares.protect,upload.single("prof
 router.post("/forgotPassword",UserController.forgotPassword)
 router.patch("/changepassword",AuthMiddlewares.protect,UserMiddlewares.validatechangePassword,UserController.changePassword)
 router.patch("/resetPassword/:resetToken",UserMiddlewares.validateResetPassword,UserController.resetPassword)
+router.patch("/removeFriend/:friendId",AuthMiddlewares.protect,UserController.removeFriend)
 module.exports=router;

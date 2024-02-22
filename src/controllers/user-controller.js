@@ -21,7 +21,7 @@ const generateToken = (id) => {
 
 async function createUser(req, res) {
   try {
-    const { name, email, userpassword, confirmPassword, phone, dob } = req.body;
+    const { email, userpassword, confirmPassword, phone } = req.body;
     const userExists = await User.findOne({ email });
     if (userExists)
       throw new AppError(
@@ -40,11 +40,8 @@ async function createUser(req, res) {
     const otp = sendOtp();
     const verify = verifyOtp(otp);
     const user = await UserService.createUser({
-      name,
-      email,
+      ...req.body,
       password: userpassword,
-      phone,
-      dob,
     });
     SuccessResponse.data = user;
     return res.status(StatusCodes.CREATED).json(SuccessResponse);
@@ -247,14 +244,9 @@ async function resetPassword(req, res) {
 
 async function updateUserProfile(req, res) {
   try {
-    const { name, phone, bio } = req.body;
     const updatedUserProfile = await User.findByIdAndUpdate(
       { _id: req.user._id },
-      {
-        name,
-        phone,
-        bio,
-      },
+      ...req.body,
       {
         new: true,
         runValidators: true,
@@ -309,6 +301,15 @@ async function updateUserProfilePicture(req, res) {
   }
 }
 
+async function removeFriend(req, res) {
+  try {
+    const response = await UserService.removeFriend(req)
+    SuccessResponse.data=response
+    return res.status(StatusCodes.OK).json(SuccessResponse)
+  } catch (error) {
+    ErrorResponse.error=error
+  }
+}
 module.exports = {
   createUser,
   loginUser,
@@ -319,4 +320,5 @@ module.exports = {
   resetPassword,
   updateUserProfile,
   updateUserProfilePicture,
+  removeFriend,
 };

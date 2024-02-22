@@ -24,7 +24,15 @@ async function getUser(data){
     }
 }
 
+async function removeFriend(data){
+    try{
+
+    }catch(error){
+        throw new AppError('Cannot remove friend',StatusCodes.BAD_REQUEST)
+    }
+}
+
 
 module.exports={
-    createUser,getUser
+    createUser,getUser,removeFriend
 }
