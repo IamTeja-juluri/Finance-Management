@@ -3,5 +3,6 @@ module.exports={
     SuccessResponse:require('./success-response'),
     Enums:require('./enums'),
     SendEmail:require('./sendEmail'),
-    FileUpload:require('./fileUpload')
+    FileUpload:require('./fileUpload'),
+    SendOtp:require('./otpService')
 }

@@ -13,7 +13,7 @@ const { ServerConfig } = require("../config");
 const crypto = require("crypto");
 const cloudinary = require("cloudinary").v2;
 const { fileSizeFormatter } = require("../utils/common/fileUpload");
-const axios = require("axios");
+const { sendOtp, verifyOtp } = require("../utils/common/otpService");
 
 const generateToken = (id) => {
   return jwt.sign({ id }, ServerConfig.JWT_SECRET, { expiresIn: "1d" });
@@ -37,8 +37,8 @@ async function createUser(req, res) {
     if (userpassword !== confirmPassword)
       throw new Error("Passwords do not match", StatusCodes.BAD_REQUEST);
 
-    const otp = sendOtp();
-    const verify = verifyOtp(otp);
+    const otp = sendOtp(req);
+    const something= verifyOtp(otp)
     const user = await UserService.createUser({
       ...req.body,
       password: userpassword,
@@ -50,30 +50,6 @@ async function createUser(req, res) {
     return res.status(error.statusCode).json(ErrorResponse);
   }
 }
-
-async function sendOtp() {
-  const options = {
-    method: "POST",
-    url: ServerConfig.OTP_URL,
-    headers: {
-      "X-RapidAPI-Key": ServerConfig.X_RAPIDAPI_KEY,
-      "X-RapidAPI-Host": ServerConfig.X_RAPIDAPI_HOST,
-    },
-  };
-  try {
-    const response = await axios.request(options);
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.error(error);
-    throw new AppError(
-      "Something went wrong from otp server",
-      StatusCodes.INTERNAL_SERVER_ERROR
-    );
-  }
-}
-
-async function verifyOtp() {}
 
 async function userInfo(req, res) {
   try {
@@ -303,11 +279,11 @@ async function updateUserProfilePicture(req, res) {
 
 async function removeFriend(req, res) {
   try {
-    const response = await UserService.removeFriend(req)
-    SuccessResponse.data=response
-    return res.status(StatusCodes.OK).json(SuccessResponse)
+    const response = await UserService.removeFriend(req);
+    SuccessResponse.data = response;
+    return res.status(StatusCodes.OK).json(SuccessResponse);
   } catch (error) {
-    ErrorResponse.error=error
+    ErrorResponse.error = error;
   }
 }
 module.exports = {
